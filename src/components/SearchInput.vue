@@ -4,6 +4,7 @@
     name="search"
     :value="value"
     @input="handleChange"
+    autocomplete="off"
   />
 </template>
 
