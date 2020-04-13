@@ -1,5 +1,7 @@
 # spacer
 
+First steps in vue - stolen project.
+
 ## Project setup
 ```
 npm install
