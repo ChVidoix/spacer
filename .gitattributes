@@ -1,2 +1,2 @@
 *.vue text eol=lf
-*.js text eol=crlf
+*.js text eol=lf
