@@ -9,8 +9,11 @@
     <Claim v-if="step === 0" />
     <SearchInput v-model="searchValue" @input="handleInput" :dark="step === 1"/>
     <div class="results" v-if="!loading && step === 1 && results">
-      <Item v-for="item in results" :item="item" :key="item.data[0].nasa_id" />
+      <Item v-for="item in results" :item="item"
+            :key="item.data[0].nasa_id" @click.native="handleModalOpen(item)"/>
     </div>
+    <Loader v-if="loading === true && step === 1" />
+    <Modal v-if="modalOpen" :item="modalItem" @closeModal="modalOpen = false"/>
   </div>
 </template>
 
@@ -21,12 +24,18 @@ import HeroImage from '@/components/HeroImage.vue';
 import Claim from '@/components/Claim.vue';
 import SearchInput from '@/components/SearchInput.vue';
 import Item from '@/components/Item.vue';
+import Modal from '@/components/Modal.vue';
+import Loader from '@/components/Loader.vue';
 
 const API = 'https://images-api.nasa.gov/search';
 
 export default {
   name: 'App',
   methods: {
+    handleModalOpen(item) {
+      this.modalOpen = true;
+      this.modalItem = item;
+    },
     // eslint-disable-next-line func-names
     handleInput: debounce(function () {
       this.loading = true;
@@ -48,9 +57,13 @@ export default {
     SearchInput,
     HeroImage,
     Item,
+    Modal,
+    Loader,
   },
   data() {
     return {
+      modalItem: null,
+      modalOpen: false,
       loading: false,
       step: 0,
       searchValue: '',
