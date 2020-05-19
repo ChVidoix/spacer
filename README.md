@@ -1,6 +1,6 @@
 # spacer
 
-First steps in vue - stolen project.
+First steps in vue
 
 ## Project setup
 ```
